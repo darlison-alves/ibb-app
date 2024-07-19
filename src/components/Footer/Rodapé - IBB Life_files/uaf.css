@@ -1,0 +1,10 @@
+				@font-face {
+					font-family: 'coves-light';
+					src: url('/wp-content/uploads/useanyfont/5660Coves-Light.woff2') format('woff2'),
+						url('/wp-content/uploads/useanyfont/5660Coves-Light.woff') format('woff');
+					  font-display: auto;
+				}
+
+				.coves-light{font-family: 'coves-light' !important;}
+
+		
