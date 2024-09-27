@@ -4,8 +4,10 @@ import { ButtonCustom } from "../Button/Button"
 import { Input } from "../Input/Input"
 import { LoadingFullLigth } from "../Loading/loading.full.compoment"
 
-import editSvg from '../../assets/svgs/edit.svg'
-import profileSvg from '../../assets/svgs/profile.svg'
+import editSvg from '../../assets/svgs/edit.svg';
+import profileSvg from '../../assets/svgs/profile.svg';
+import invoice from '../../assets/svgs/invoice-bill-svgrepo-com.svg';
+import { useNavigate } from "react-router-dom"
 
 export const ClientTable = ({
   clients = [],
@@ -15,6 +17,8 @@ export const ClientTable = ({
   onEdit = (data: any) => { },
   onProfile = (userId: any) => { }
 }) => {
+
+  const navigate = useNavigate()
 
   return (
     <div className="mt-3">
@@ -75,8 +79,9 @@ export const ClientTable = ({
                   </td>
                   <td className="py-4 px-6 flex text-right">
 
-                    <img onClick={() => onProfile(client?.user?.id)} src={profileSvg} width={25} className="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-5" style={{ cursor: "pointer" }} />
+                    <img onClick={() => onProfile(client?.user?.id)} src={profileSvg} width={25} className="font-medium text-blue-600 dark:text-blue-500 hover:underline" style={{ cursor: "pointer" }} />
                     <img onClick={() => onEdit(client)} src={editSvg} width={25} className="font-medium text-blue-600 dark:text-blue-500 hover:underline" style={{ cursor: "pointer" }} />
+                    <img onClick={() => navigate("/admin/billing/create", { state: {userId: client?.user?.id} })} src={invoice} width={25} className="font-medium text-blue-600 dark:text-blue-500 hover:underline" style={{ cursor: "pointer" }} />
                     {/* <a href="#" onClick={() => onEdit(client)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> */}
                   </td>
                 </tr>

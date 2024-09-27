@@ -23,14 +23,15 @@ export const SubscriptionView = () => {
     const [subscriptions, setSubscriptions] = useState<Array<any>>([]);
     const [loading, setLoading] = useState(false)
 
-    const { setComponet, setOpen, setTitle } = useContext(ModalContext)
+    const { setComponet, setOpen, setDescription, setTitle } = useContext(ModalContext)
     const { showToastMessange } = useContext(ToastContext);
 
     const [pagination, setPagination] = useState(filter_page);
     const [filters, setFilters] = useState(filter_page);
 
     const onModal = (subscription_id: number) => {
-        setTitle('Deseja realmente desabilita Assinatura ? ')
+        setDescription('Deseja realmente desabilita Assinatura ? ')
+        
         setComponet(<>
             <ConfirmBtn
                 onConfirm={(cb = () => {}) => {

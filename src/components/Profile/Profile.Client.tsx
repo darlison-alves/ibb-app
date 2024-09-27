@@ -11,6 +11,7 @@ import { ToastContext } from "../../context/ToastContext";
 import { TypeMessageEnum } from "../../interfaces/enums/errors.enum";
 import { getResponseError } from "../../utils/tratamento.response-error";
 import { ProfileMenu } from "../Menu/profile.menu";
+import { BankFormModal } from "./subcomponent/bank.form.modal";
 
 interface IProfileClient {
     userId?: any;
@@ -21,26 +22,27 @@ const clientService = new ClientService();
 
 export const ProfileClient = ({ userId, onEdit = () => { } }: IProfileClient) => {
     const [client, setClient] = useState<IClientUser>({})
-    const { setTitle, setOpen, open, setComponet } = useContext(ModalContext);
+    const [openPopup, setOpenPopup] = useState(false);
+    // const { setTitle, setOpen, open, setComponet } = useContext(ModalContext);
     const { showToast, setType } = useContext(ToastContext);
 
 
-    const openModal = () => {
-        setTitle("Dados Bancários")
-        setOpen(!open)
-        setComponet(<BankDataForm
-            cb_err={(message: string) => {
-                showToast(message)
-                setType(TypeMessageEnum.error)
-            }}
-            cb={() => {
-                showToast("dados salvo com sucesso!")
-                setType(TypeMessageEnum.success)
-            }}
-            initialValues={client?.user?.contaBancaria || { digitoAgencia: "0", digitoConta: "0" }}
-            userId={userId}
-            username={client?.user?.username || ""} />)
-    }
+    // const openModal = () => {
+    //     setTitle("Dados Bancários")
+    //     setOpen(!open)
+    //     setComponet(<BankDataForm
+    //         cb_err={(message: string) => {
+    //             showToast(message)
+    //             setType(TypeMessageEnum.error)
+    //         }}
+    //         cb={() => {
+    //             showToast("dados salvo com sucesso!")
+    //             setType(TypeMessageEnum.success)
+    //         }}
+    //         initialValues={client?.user?.contaBancaria || { digitoAgencia: "0", digitoConta: "0" }}
+    //         userId={userId}
+    //         username={client?.user?.username || ""} />)
+    // }
     
     useEffect(() => {
         clientService.findByUserID(userId)
@@ -94,12 +96,14 @@ export const ProfileClient = ({ userId, onEdit = () => { } }: IProfileClient) =>
                         </div>
 
                         <div className="flex justify-between items-center my-5 px-6 pb-3 space-x-3">
-                            <BtnPrimary hasIcon={false} text="DADOS BANCÁRIOS" type="button" onClick={() => openModal()} />
+                            <BtnPrimary hasIcon={false} text="DADOS BANCÁRIOS" type="button" onClick={() => setOpenPopup(true)} />
                             <BtnPrimary hasIcon={false} onClick={() => onEdit(client)} text="EDITAR DADOS" type="button" />
                             <BindWithInsurance userId={userId} />
                         </div>
                     </div>
                 </div>
+
+                <BankFormModal open={openPopup} setOpen={setOpenPopup} />
             </div>
         </div>
     )

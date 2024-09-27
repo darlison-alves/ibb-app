@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useState } from "react"
 import { api } from "../../config/axios.base"
 import { IBank } from "../../interfaces/bank.interface"
-import { SelectSearch } from "./Select.search"
+import { Select } from "antd"
 
 interface ISelectBanksProps {
   bank?: any,
@@ -16,7 +16,7 @@ export const SelectBanks = ({ bank, onChange }: ISelectBanksProps) => {
   useEffect(() => {
     api().get('/banking-institution')
       .then(res => {
-        setBanks(res.data)
+        setBanks( res.data.map((b: any) => ({ value: b.codigo, label: b.nome })) )
       }).catch(err => {
         const { response = {} } = err;
         const { data = {} } = response;
@@ -26,6 +26,18 @@ export const SelectBanks = ({ bank, onChange }: ISelectBanksProps) => {
   }, [])
 
   return (
-    <SelectSearch options={banks} onChange={onChange} objectValue={bank} />
-  )
+    <Select
+      showSearch
+      value={bank.codigo}
+      defaultValue={bank}
+      style={{ width: 200 }}
+      placeholder="Selecione seu banco"
+      optionFilterProp="label"
+      onChange={(_, option) => { onChange(option) }}
+      filterSort={(optionA, optionB) =>
+        (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+      }
+      options={banks}
+    />
+  );
 }

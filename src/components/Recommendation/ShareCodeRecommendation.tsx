@@ -22,7 +22,7 @@ export const ShareCodeRecommendation = ({ codeRecommendation, userId, urlPlan, o
   const { showToast } = useContext(ToastContext)
 
   const redirectWhats = () => {
-    window.open(`https://api.whatsapp.com/send?text=Utilize meu código de indicação ${codeRecommendation}. Link para cadastro https://app.ibigboss.com.br/plans?codeRecommendation=${codeRecommendation}`)
+    window.open(`https://api.whatsapp.com/send?text=Utilize meu código de indicação ${codeRecommendation}. Link para cadastro https://app.ibblife.com.br/plans?codeRecommendation=${codeRecommendation}`)
   }
 
   const sendEmail = () => {
@@ -35,7 +35,6 @@ export const ShareCodeRecommendation = ({ codeRecommendation, userId, urlPlan, o
     }
 
     const validated = ShareCodeSchema.validate(payload)
-    console.log('validated', validated)
 
     if (validated.error?.details.length) {
       const [detail] = validated.error?.details

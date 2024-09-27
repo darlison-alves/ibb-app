@@ -52,6 +52,8 @@ import { EmployeeListAdminView } from './views/Company/EmployeeListAdminView';
 import { CheckoutView } from './views/Checkout/Checkout.View';
 import FirstStepFormCheckout from './views/FirstStepForm/FirstStepFormCheckout';
 import SecondStepFormCheckout from './views/SecondStepForm/SecondStepFormCheckout';
+import SubscriptionDetail from './views/Subscription/subscription.detail';
+import { BillingView } from './views/Subscription/billing/BillingView';
 
 interface IJwtPayload extends JwtPayload {
   access: [
@@ -115,10 +117,10 @@ function App() {
               <Route path='/plans/:id/pay'
                 element={
                   // <ProtectedRoute>
-                    <main className="App min-h-screen bg-[#F5F5F5] mt-5">
-                      <SecondStepForm />
-                      {/* <Pagination /> */}
-                    </main>
+                  <main className="App min-h-screen bg-[#F5F5F5] mt-5">
+                    <SecondStepForm />
+                    {/* <Pagination /> */}
+                  </main>
                   // </ProtectedRoute>
                 }
               />
@@ -135,7 +137,7 @@ function App() {
                 element={
                   <ProtectedRoute>
                     {/* <main className="App min-h-screen bg-[#F5F5F5]"> */}
-                    <OrderSubscription />
+                    <OrderSubscription orders={[]} />
                     {/* <Pagination /> */}
                     {/* </main> */}
                   </ProtectedRoute>
@@ -307,6 +309,15 @@ function App() {
                 }
               />
 
+              <Route path='/admin/subscriptions/users/:userId'
+                element={
+                  <ProtectedRoute>
+                    <main className="App bg-[#F5F5F5] min-h-screen">
+                      <SubscriptionDetail />
+                    </main>
+                  </ProtectedRoute>
+                }
+              />
 
               <Route path='/clients/new'
                 element={
@@ -424,6 +435,13 @@ function App() {
                 path='/recover-password/:hash'
                 element={
                   <RecoverPasswordView />
+                }
+              />
+
+              <Route
+                path='/admin/billing/create'
+                element={
+                  <BillingView />
                 }
               />
 

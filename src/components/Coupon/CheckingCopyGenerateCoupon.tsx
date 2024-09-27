@@ -1,13 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { MdOutlineCancelScheduleSend, MdEmail } from "react-icons/md";
 import { FaWhatsapp } from 'react-icons/fa'
-
-import { FiSend } from 'react-icons/fi'
-
-import { CouponContext } from "../../context/Coupon/CouponContext";
 import { ICoupon } from "../../interfaces/coupon.interface"
 import { Button, ButtonPrimary } from "../Button/Button";
-import { FullButton } from "../Button/FullButton"
 import { Input } from "../Input/Input";
 import { IconButton } from "../Button/IconButton";
 import { MaskedInput } from "../InputMask/InputMask";

@@ -3,8 +3,11 @@ import { ButtonCustom } from "../Button/Button"
 import { LoadingFullLigth } from "../Loading/loading.full.compoment"
 
 import trash_svg from '../../assets/svgs/cancel-svgrepo-com.svg'
+import detail_svg from '../../assets/svgs/enter-svgrepo-com.svg'
+
 import { formatter } from "../../utils/price.util"
 import { Input } from "../Input/Input"
+import { useNavigate } from "react-router-dom"
 
 export const SubscriptionsTable = ({
   subscriptions = [],
@@ -16,6 +19,12 @@ export const SubscriptionsTable = ({
   onAddBenfitis = () => { },
   onModalRel = (planId: number) => { }
 }: any) => {
+
+  const navigate = useNavigate()
+
+  const gotoDetail = (subscription: any) => {
+    navigate(`/admin/subscriptions/users/${subscription?.user?.id}`)
+  }
 
   return (
     <div className="relative sm:rounded-lg flex justify-center mt-3">
@@ -78,7 +87,8 @@ export const SubscriptionsTable = ({
                   <td className="py-4 px-6">
                     {user.name}
                   </td>
-                  <td className="py-4 px-6 flex text-right">
+                  <td className="py-4 px-6 flex text-right space-x-2">
+                    <img onClick={() => gotoDetail(subscription)} src={detail_svg} width={25} className="font-medium text-blue-600 dark:text-blue-500 hover:underline" style={{ cursor: "pointer" }} />
                     <img onClick={() => onDisable(subscription.id)} src={trash_svg} width={25} className="font-medium text-blue-600 dark:text-blue-500 hover:underline" style={{ cursor: "pointer" }} />
                     {/* <img alt="add benficios" onClick={() => onModalRel(subscription.id)} src={circled_plus} width={25} className="font-medium text-blue-600 dark:text-blue-500 hover:underline" style={{ cursor: "pointer" }} /> */}
                   </td>

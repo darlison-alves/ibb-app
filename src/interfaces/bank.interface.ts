@@ -15,13 +15,13 @@ export interface IBankData {
   codigoBanco?: string;
   tipo?: BankAccountType;
   agencia?: string;
-  digitoAgencia: string;
+  digitoAgencia?: string;
   conta?: string;
   digitoConta: string
   status?: string
 }
 
 export interface IBank {
-  codigo?: string;
-  nome?: string
+  value?: string;
+  label?: string
 }

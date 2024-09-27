@@ -1,4 +1,5 @@
 export interface IOrder {
+  way?: string
   dataPagamento?: string
   dataVencimento?: string
   linhaDigital?: string
@@ -13,6 +14,7 @@ export interface IOrder {
   urlBoleto?: string
   userId?: number;
   valor?: number;
+  createdAt?: string;
 }
 
 export interface ISubscriptionUser {

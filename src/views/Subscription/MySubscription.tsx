@@ -17,7 +17,6 @@ export const MySubscriptionView = () => {
   const { user } = useGetInfoUser()
 
   useEffect(() => {
-    console.log("aqui")
     api().get("/subscriptions/me")
       .then(res => {
         setSubscription(res.data)

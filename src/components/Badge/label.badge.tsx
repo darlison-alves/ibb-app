@@ -2,7 +2,7 @@ import { StatusExtractEnum } from "../../interfaces/enums/extract.status"
 
 interface BadgeProps {
     text: string
-    color?: "blue" | "gray" | "red" | "yellow" | "green" | "[#04d361]"
+    color?: string
 }
 
 interface IBadgeByStatusProps extends BadgeProps {
@@ -11,7 +11,15 @@ interface IBadgeByStatusProps extends BadgeProps {
 
 export const Badge = ({ color = "blue", text }: BadgeProps) => {
     return (
-        <span className={`bg-${color}-100 text-${color}-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-${color}-900 dark:text-${color}-300`}>{text}</span>
+        <span className={`inline-flex items-center rounded-md bg-${color}-50 px-2 py-1 text-xs font-medium text-${color}-600 ring-1 ring-inset ring-${color}-500/10`}>
+            {text}
+            <button type="button" className={`inline-flex items-center p-1  ms-2 text-sm text-${color}-400 bg-transparent rounded-sm hover:bg-${color}-200 hover:text-${color}-900 dark:hover:bg-${color}-800 dark:hover:text-${color}-300`} data-dismiss-target={`#badge-dismiss-${color}`} aria-label="Remove">
+                <svg className="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                </svg>
+                <span className="sr-only">Remove badge</span>
+            </button>
+        </span>
     )
 }
 
@@ -40,11 +48,11 @@ export const BadgeBlue = ({ color = "yellow", text }: BadgeProps) => {
 }
 
 export const BadgeByStatus = ({ text, status }: IBadgeByStatusProps) => {
-    switch(status) {
+    switch (status) {
         case StatusExtractEnum.PAGAR:
             return <BadgeRed text={text} color={"red"} />
         case StatusExtractEnum.PENDENTE:
-                return <BadgeYellow text={text} color={"yellow"} />
+            return <BadgeYellow text={text} color={"yellow"} />
         case StatusExtractEnum.PAGO:
             return <BadgeGreen text={text} color={"green"} />
         default:
